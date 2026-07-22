@@ -1,46 +1,269 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مكتبة الدراسات اللغوية والأدبية</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
-        header { background: linear-gradient(135deg, #2c3e50, #4ca1af); color: white; text-align: center; padding: 40px 20px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        header h1 { font-size: 2.3rem; margin-bottom: 10px; }
-        .container { max-width: 950px; margin: 0 auto; }
-        .book-card { background: white; padding: 16px 20px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
-        .book-info { display: flex; align-items: center; gap: 15px; flex: 1; }
-        .book-number { background-color: #4ca1af; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; flex-shrink: 0; }
-        .book-title { font-size: 1.05rem; color: #2c3e50; font-weight: bold; }
-        .download-btn { background-color: #27ae60; color: white; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.95rem; }
-        .download-btn:hover { background-color: #219653; }
-        footer { text-align: center; margin-top: 40px; color: #7f8c8d; font-size: 0.9rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة الدراسات اللغوية والأدبية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f4ecd8;
+    --parchment-deep:#e9dcb9;
+    --ink:#2a1810;
+    --crimson:#7a1c2b;
+    --crimson-deep:#5a121e;
+    --gold:#c9a227;
+    --gold-light:#e6c65c;
+    --teal:#1f5c52;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Amiri', serif;
+    color:var(--ink);
+    background-color:var(--parchment);
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(122,28,43,0.06), transparent 60%),
+      repeating-linear-gradient(45deg, rgba(201,162,39,0.05) 0 2px, transparent 2px 34px),
+      repeating-linear-gradient(-45deg, rgba(122,28,43,0.04) 0 2px, transparent 2px 34px);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .container{max-width:980px; margin:0 auto;}
+
+  /* ===== الإطار الزخرفي للعنوان ===== */
+  header{
+    position:relative;
+    background:linear-gradient(160deg, var(--crimson) 0%, var(--crimson-deep) 100%);
+    border:2px solid var(--gold);
+    outline:1px solid rgba(201,162,39,0.5);
+    outline-offset:5px;
+    border-radius:6px;
+    padding:46px 20px 38px;
+    text-align:center;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(42,24,16,0.25);
+    animation:unveil 1s ease-out;
+  }
+  @keyframes unveil{
+    from{opacity:0; transform:translateY(-14px) scale(0.98);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+  }
+  header::before, header::after,
+  .corner{
+    content:'';
+    position:absolute;
+    width:64px; height:64px;
+    border:2px solid var(--gold-light);
+    opacity:0.85;
+  }
+  header::before{ top:8px; right:8px; border-left:none; border-bottom:none; border-radius:0 8px 0 0;}
+  header::after{ top:8px; left:8px; border-right:none; border-bottom:none; border-radius:8px 0 0 0;}
+  .corner-bl{ position:absolute; bottom:8px; right:8px; width:64px; height:64px; border:2px solid var(--gold-light); border-left:none; border-top:none; border-radius:0 0 8px 0; opacity:0.85;}
+  .corner-br{ position:absolute; bottom:8px; left:8px; width:64px; height:64px; border:2px solid var(--gold-light); border-right:none; border-top:none; border-radius:0 0 0 8px; opacity:0.85;}
+
+  .eyebrow{
+    font-family:'Aref Ruqaa Ink', serif;
+    color:var(--gold-light);
+    letter-spacing:2px;
+    font-size:0.95rem;
+    margin-bottom:10px;
+    opacity:0.9;
+  }
+  header h1{
+    font-family:'Aref Ruqaa Ink', serif;
+    font-weight:700;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    color:var(--gold-light);
+    text-shadow:0 2px 8px rgba(0,0,0,0.35);
+    margin-bottom:14px;
+  }
+  header p{
+    font-style:italic;
+    color:#f1e2c2;
+    font-size:1.05rem;
+    max-width:560px;
+    margin:0 auto;
+    opacity:0.95;
+  }
+
+  .divider{
+    width:100%; max-width:420px;
+    margin:34px auto 26px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .divider::before, .divider::after{
+    content:''; flex:1; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .divider svg{ flex-shrink:0; width:26px; height:26px; }
+
+  /* ===== قائمة الكتب ===== */
+  #list{ display:flex; flex-direction:column; gap:14px; }
+
+  .book-card{
+    position:relative;
+    background:linear-gradient(180deg, #fffaf0, var(--parchment-deep));
+    border:1px solid rgba(122,28,43,0.25);
+    border-radius:10px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    box-shadow:0 2px 6px rgba(42,24,16,0.08);
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise 0.6s ease forwards;
+    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .book-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px rgba(122,28,43,0.18);
+    border-color:var(--gold);
+  }
+  @keyframes rise{ to{opacity:1; transform:translateY(0);} }
+
+  .book-info{ display:flex; align-items:center; gap:16px; flex:1; min-width:0; }
+
+  .medallion{
+    flex-shrink:0;
+    width:42px; height:42px;
+    display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 70%);
+    color:var(--crimson-deep);
+    font-family:'Aref Ruqaa Ink', serif;
+    font-weight:700;
+    font-size:1.05rem;
+    clip-path:polygon(50% 0%, 85% 15%, 100% 50%, 85% 85%, 50% 100%, 15% 85%, 0% 50%, 15% 15%);
+    box-shadow:0 0 0 2px var(--crimson-deep) inset;
+    transition:transform 0.4s ease;
+  }
+  .book-card:hover .medallion{ transform:rotate(90deg); }
+
+  .book-title{
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--crimson-deep);
+    line-height:1.5;
+  }
+
+  .download-btn{
+    flex-shrink:0;
+    font-family:'Amiri', serif;
+    font-weight:700;
+    color:var(--parchment);
+    background:linear-gradient(160deg, var(--teal), #123f38);
+    border:1px solid var(--gold);
+    padding:9px 20px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:0.95rem;
+    white-space:nowrap;
+    transition:background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  }
+  .download-btn:hover{
+    background:linear-gradient(160deg, var(--gold), #a5811d);
+    color:var(--crimson-deep);
+    transform:scale(1.05);
+    box-shadow:0 4px 14px rgba(201,162,39,0.4);
+  }
+
+  footer{
+    text-align:center;
+    margin-top:44px;
+    color:var(--crimson-deep);
+    font-family:'Aref Ruqaa Ink', serif;
+    font-size:0.95rem;
+    opacity:0.75;
+  }
+
+  @media (max-width:560px){
+    .book-card{ flex-direction:column; align-items:flex-start; }
+    .download-btn{ align-self:flex-end; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>مكتبة الدراسات اللغوية والأدبية</h1>
-        <p>استعرض وتحميل الكتب الدراسية</p>
-    </header>
-    <div class="container">
-        <script>
-            for(let i = 1; i <= 34; i++) {
-                document.write(`
-                    <div class="book-card">
-                        <div class="book-info">
-                            <span class="book-number">${i}</span>
-                            <span class="book-title">الكتاب رقم ${i}</span>
-                        </div>
-                        <a href="Book-${i}.pdf" class="download-btn" target="_blank">تحميل / عرض</a>
-                    </div>
-                `);
-            }
-        </script>
-    </div>
-    <footer>
-        جميع الحقوق محفوظة &copy; 2026
-    </footer>
+
+<div class="container">
+  <header>
+    <span class="corner-bl"></span><span class="corner-br"></span>
+    <div class="eyebrow">فهرس مصادر ومراجع</div>
+    <h1>مكتبة الدراسات اللغوية والأدبية</h1>
+    <p>استعرض وحمّل كتب النحو، البلاغة، اللسانيات، والدراسات التاريخية</p>
+  </header>
+
+  <div class="divider">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.5">
+      <path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/>
+    </svg>
+  </div>
+
+  <div id="list"></div>
+
+  <footer>جميع الحقوق محفوظة &copy; 2026</footer>
+</div>
+
+<script>
+  const books = [
+    ["حاشية الخضري على شرح ابن عقيل علي ألفية ابن مالك", "حاشية%20الخضري%20علي%20شرح%20ابن%20عقيل%20علي%20ألفية%20ابن%20مالك.pdf"],
+    ["البارع في اللغة والأدب", "البارع%20في%20اللغة%20والأدب.pdf"],
+    ["الحسن والاحسان في ما خلا عنه اللسان", "الحسن%20والاحسان%20في%20ما%20خلا%20عنه%20اللسان.pdf"],
+    ["لب الألباب في علم الإعراب", "لب%20الألباب%20في%20علم%20الإعراب.pdf"],
+    ["دراسات في فلسفة النحو والصرف واللغة والرسم، د. مصطفى جواد", "دراسات_في_فلسفة_النحو_والصرف_واللغة_والرسم،_د_مصطفى_جواد.pdf"],
+    ["معجم الشعراء منذ عصر النهضة - ج3", "معجم%20الشعراء%20منذ%20عصر%20النهضة%20-%20ج3.pdf"],
+    ["معجم الشعراء منذ عصر النهضة - ج2", "معجم%20الشعراء%20منذ%20عصر%20النهضة%20-%20ج2.pdf"],
+    ["معجم الشعراء منذ عصر النهضة - ج1", "معجم%20الشعراء%20منذ%20عصر%20النهضة%20-%20ج1.pdf"],
+    ["المقاييس البيداغوجية والادارية - دليلك نحو النجاح", "المقاييس%20البيداغوجية%20والادارية%20-%20دليلك%20نحو%20النجاح.pdf"],
+    ["فضاء الكتب - أصول الإنشاء والخطابة ويليه الخطابة عند العرب", "فضاء%20الكتب-أصول%20الإنشاء%20والخطابة%20ويليه%20الخطابة%20عند%20العرب.pdf"],
+    ["ديوان الحماسة 3 (Noor-Book.com)", "ديوان%20الحماسة%203%20Noor-Book.com.pdf"],
+    ["حماسة أبي تمام وشروحها (Noor-Book.com)", "حماسة%20أبي%20تمام%20وشروحها%20Noor-Book.com.pdf"],
+    ["أدوات الربط في العربية المعاصرة", "115606_ادوات_الربط_في_العربية_المعاصرة.pdf"],
+    ["فضاء الكتب - الإعجاز والإيجاز", "فضاء%20الكتب-الإعجاز%20والإيجاز.pdf"],
+    ["البينة لعلوم اللغة العربية - مجدي رشاد", "البينة%20لعلوم%20اللغة%20العربية%20-%20مجدي%20رشاد.pdf"],
+    ["البلاغة الواضحة - المعاني", "البلاغة%20الواضحة_المعاني.pdf"],
+    ["فضاء الكتب - الصناعتين الكتابة والشعر", "فضاء%20الكتب-الصناعتين%20الكتابة%20والشعر.pdf"],
+    ["بنية الخطاب الشعري في لامية عبده بن الطبيب - مقاربة أسلوبية", "بنية-الخطاب-الشعري-في-لامية-عبده-بن-الطبيب-مقاربة-أسلوبية.pdf"],
+    ["الشعر الجاهلي بين الغنائية والموضوعية - د. عبدالله بن أحمد الفيفي", "د.%20عبدالله%20بن%20أحمد،%20الشعر%20الجاهلي%20بين%20الغنائية%20والموضوعية%20(1).الفيفي،%20أ.pdf"],
+    ["لهجات فيفاء (جذور عربية) - د. عبدالله بن أحمد الفيفي", "الفيفي،%20عبدالله%20بن%20أحمد،%20لهجات%20فيفاء%20(جذور%20العربية)،%2025-1-1433هـ%2020-12-2011م.pdf"],
+    ["ألقاب الشعراء - د. عبدالله بن أحمد الفيفي", "د.%20عبدالله%20بن%20أحمد،%20ألقاب%20الشعراء.الفيفي،%20أ.pdf"],
+    ["شعر التفعيلات وقضايا أخرى (منقحة) - د. عبدالله بن أحمد الفيفي", "د.%20عبدالله%20بن%20أحمد،%20شعر%20التفعيلات%20وقضايا%20أخرى%20(منقحة).-.الفيفي،%20أ.pdf"],
+    ["الجمل في النحو - الزجاج", "الجمل%20في%20النحو%20الزجاج.pdf"],
+    ["فضاء الكتب - درة الغواص وشرحها وحواشيها وتكملتها", "فضاء%20الكتب-%20درة%20الغواص%20وشرحها%20وحواشيها%20وتكملتها.pdf"],
+    ["مختصر تاريخ المغرب من الفتح الاسلامي إلى بناء الدولة المغربية الحديثة", "مختصر%20تاريخ%20المغرب%20من%20الفتح%20الاسلامي%20إلى%20بناء%20الدولة%20المغربية%20الحديثة.pdf"],
+    ["في تحليل الخطاب الشعري (Noor-Book.com)", "في%20تحليل%20الخطاب%20الشعري%20Noor-Book.com.pdf"],
+    ["تحليل النص دراسة الروابط النصية في ضوء علم اللغة النصي", "تحليل%20النص%20دراسة%20الروابط%20النصية%20في%20ضوء%20علم%20اللغة%20النصي3.pdf"],
+    ["لغة الشعر دراسة في الضرورة الشعرية (Noor-Book.com)", "لغة%20الشعر%20دراسة%20في%20الضرورة%20الشعرية%203%20Noor-Book.com.pdf"],
+    ["تحليل الخطاب الشعري في منظور اللسانيات النصية", "تحليل%20الخطاب%20الشعري%20في%20منظور%20اللسانيات3النصية.pdf"],
+    ["لسانيات الخطاب الأسلوبية و التلفظ و التداولية", "لسانيات%20الخطاب%20الاسلوبية%20و%20التلفظ%20و%20التداولية%201(3).pdf"],
+    ["في اللسانيات التداولية (Noor-Book.com)", "في%20اللسانيات%20التداولية%203%20Noor-Book.com.pdf"],
+    ["التداولية وتحليل الخطاب السيميائي في النقد الأدبي المعاصر - هامل بن عيسى", "التداولية%20وتحليل%20الخطاب%20السيميائي%20في%20النقد%20الأدبي%20المعاصر%20هامل%20بن%20عيسى3.pdf"],
+    ["مقاربة تداولية للقصيدة التفاعلية النقائض - خديجة إبراهيمي", "مقاربة%20تداولية%20للقصيدة%20التفاعلية%20النقائض3(1)أنموذجا%20خديجة%20إبراهيمي.pdf"],
+    ["بين تداولية الأفعال الكلامية والحجاج مقاربة مفاهيمية", "بين%20تداولية%20الأفعال%20الكلامية%20والحجاج%20مقاربة%20مفاهيمية3.pdf"]
+  ];
+
+  const list = document.getElementById('list');
+  books.forEach((b, i) => {
+    const [title, href] = b;
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.style.animationDelay = (Math.min(i, 14) * 0.05) + 's';
+    card.innerHTML = `
+      <div class="book-info">
+        <span class="medallion">${i + 1}</span>
+        <span class="book-title">${title}</span>
+      </div>
+      <a href="${href}" class="download-btn" target="_blank">تحميل / عرض</a>
+    `;
+    list.appendChild(card);
+  });
+</script>
+
 </body>
 </html>
